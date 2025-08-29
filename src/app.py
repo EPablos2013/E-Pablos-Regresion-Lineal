@@ -1,23 +1,22 @@
-from utils import db_connect
-engine = db_connect()
-
-# your code here
 import pandas as pd
 import json
 import streamlit as st
 import pickle
 from pickle import load
+import os
 
-# Cargar modelo
-with open("/workspaces/E-Pablos-Regresion-Lineal/src/modelo_regresion_lineal_default.pkl", "rb") as file:
+
+current_dir = os.path.dirname(__file__)
+
+with open(os.path.join(current_dir, "modelo_regresion_lineal_default.pkl"), "rb") as file:
     model = pickle.load(file)
 
-# Cargar columnas de JSON
-with open("/workspaces/E-Pablos-Regresion-Lineal/src/sex_rules.json", "r") as f:
+with open(os.path.join(current_dir, "sex_rules.json"), "r") as f:
     sex_dic = json.load(f)
 
-with open("/workspaces/E-Pablos-Regresion-Lineal/src/smoker_rules.json", "r") as f:
+with open(os.path.join(current_dir, "smoker_rules.json"), "r") as f:
     smoker_dic = json.load(f)
+
 
 st.title("Predicción de Coste de Seguro Médico")
 
